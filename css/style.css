@@ -1,0 +1,53 @@
+/* style.css file ignored by git */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+body{
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eb5191;
+}
+.container {
+  z-index: 1;
+  width: 100%;
+  margin: 20px auto 20px auto;
+    border-radius: 24px;
+    background: #F6F5F0;
+    padding: 2%;
+    box-shadow: 0px 10px 6px -8px rgba(0,0,0,0.75);
+}
+.container h2 {
+    margin: 0 0 30px;
+    text-align: center;
+}
+footer{
+  border-radius: 20px;
+}
+img#flag {
+    height: 35px;
+    width: 35px;
+}
+.card {
+    border: none;
+    margin-bottom: 20px;
+    background: none;
+    border-radius: 20px;
+}
+.card-body{
+  text-align: center;
+}
+.card-title{
+  padding-left: 0.75rem;
+  padding-top: 0.75rem;
+  margin-bottom: 0;
+}
+h5{
+  font-size: 1.75em;
+}
+.card-body span {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+
