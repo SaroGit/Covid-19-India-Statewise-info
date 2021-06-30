@@ -49,5 +49,14 @@ h5{
     font-weight: 700;
     letter-spacing: 4px;
 }
+footer{
+  padding: 0.4rem;
+}
+.container-fluid{
+  padding: 0;
+}
+input{
+  border: 2px solid green;
+}
 
 
