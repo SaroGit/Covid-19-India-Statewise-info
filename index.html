@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Covid-19 Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+  <body>
+    <div style="width: 100%; padding: 20px;">
+        <div class="container">
+            <h2>COVID -19 Cases in India <img  id="flag" src="https://disease.sh/assets/img/flags/in.png" alt="Indian flag"></h2>
+              <div class="row" style="color: aliceblue;">
+                  <div class="col-12 col-md-3">
+                      <div class="card" style="background: #41a7ff">
+                          <i class="card-title fa fa-tachometer fa-3x"></i>
+                          <div class="card-body">
+                              <h5>Active Cases</h5>
+                              <span id="active"></span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-3">
+                      <div class="card" style="background: #ff3434">
+                          <i class="card-title fa fa-th-list fa-3x"></i>
+                          <div class="card-body">
+                              <h5>Total Cases</h5>
+                              <span id="cases"></span>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- <div class="card col-12 col-md-6 col-lg-4">
+                      <div style="background: #32b336">
+                          <i class="card-title fa fa-times-circle fa-3x"></i>
+                          <div class="card-body">
+                              <div>
+                                  <h5>Critical Cases</h5>
+                                  <span id="critical"></span>
+                              </div>
+                          </div>
+                      </div>
+                  </div> -->
+                  <div class="col-12 col-md-3">
+                     <div class="card" style="background: #d83f3f">
+                      <i class="card-title fa fa-times fa-3x"></i>
+                      <div class="card-body">
+                          <div>
+                              <h5>Deaths</h5>
+                              <span id="death"></span>
+                          </div>
+                      </div>
+                     </div>
+                  </div>
+                  <div class="col-12 col-md-3">
+                      <div class="card" style="background: #ffa501">
+                          <i class="card-title fa fa-check-square-o fa-3x"></i>
+                          <div class="card-body">
+                              <div>
+                                  <h5>Recovered</h5>
+                                  <span id="recovered"></span>
+                              </div>
+                          </div> 
+                      </div>
+                  </div>
+              </div><!--  end row 1 -->
+              <div class="row">
+                  <div class="col-12 col-md-6">
+                      <b>Source :</b> <span id="source"></span>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <b>LastUpdated :</b><span id="update"></span>
+                  </div>
+              </div>
+          </div>  
+          <div class="container">
+            <h3 class="text-center">Search it here</h3>
+            <div class="row">
+                <div class="col" style="color: aliceblue;">
+                    <div class="card card-body">
+                        <input id="input" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>State</th>
+                            <th>Active</th>
+                            <th>confirmed</th>
+                            <th>Recovered</th>
+                            <th>Deaths</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablebody">
+                    </tbody>
+                </table>
+            </div>
+          </div>   
+          <div class="container-fluid">
+            <footer class="bg-dark">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0" style="color: white;">Take your vaccine at time. Wear your mask properly. Don't step out of your house unless if it's absolutely necessary.</p>
+                    <footer class="blockquote-footer" style="color: white;">Made with ❤️ and care by <cite title="Source Title">Saravanan</cite></footer>
+                </blockquote>
+            </footer>
+          </div> 
+    </div>
+  </body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+var statewiseData;
+function buildTable(data){
+    var table=document.getElementById('tablebody');
+    table.innerHTML='';
+    for(var i=0;i<35;i++){
+        var row=`
+        <tr>
+            <th>${data[i].state}</th>
+                <td class="bg-warning">${data[i].active}</td>
+                <td class="bg-info">${data[i].confirmed}</td>
+                <td class="bg-danger">${data[i].deaths}</td>
+                <td class="bg-success">${data[i].recovered}</td>    
+            </tr>`;
+        table.innerHTML+=row;
+    }
+}
+fetch('https://api.rootnet.in/covid19-in/unofficial/covid19india.org/statewise')
+.then((response) => {
+  return response.json();
+})
+.then((Data) => {
+    var total=Data.data.total;
+    statewiseData=Data.data.statewise;
+    var source=Data.data.source;
+    var lastUpdated=Data.data.lastRefreshed;
+    buildTable(statewiseData);
+    document.getElementById("active").innerHTML = total.active.toLocaleString();
+    document.getElementById("cases").innerHTML = total.confirmed.toLocaleString();
+    document.getElementById("death").innerHTML = total.deaths.toLocaleString();
+    document.getElementById("recovered").innerHTML = total.recovered.toLocaleString();
+    document.getElementById("source").innerHTML=source.toLocaleString();
+    document.getElementById("update").innerHTML=lastUpdated.toLocaleString();
+});
+
+function searchTable(val, data){
+    var filteredData=[];
+    for(var i=0;i<35;i++){
+        val=val.toLowerCase();
+        var name=data[i].state.toLowerCase();
+
+        if(name.includes(val)){
+            filteredData.push(data[i]);
+        }
+    }
+    return filteredData;
+}
+//Search Input
+$('#input').on('keyup',()=>{
+    var value=$('#input').val();
+    var filteredData=searchTable(value,statewiseData);
+    buildTable(filteredData);
+});
+</script>
